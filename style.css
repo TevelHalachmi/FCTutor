@@ -1,0 +1,37 @@
+.input-container {
+  position: relative;
+  max-width: 500px;
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+textarea {
+  width: 100%;
+  padding: 20px 10px 10px;
+  font-size: 16px;
+  line-height: 1.4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  min-height: 100px;
+}
+
+.promptLabel {
+  position: absolute;
+  top: -8px; 
+  left: 12px; 
+  background: white;
+  padding: 0 5px;
+  color: #999;
+  font-size: 12px; 
+  pointer-events: none;
+}
+
+button {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.input-container:focus-within label{
+  color: black;
+}

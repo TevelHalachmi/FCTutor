@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FC Tutor</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <div class="input-container">
+        <label for="subject" class="promptLabel">Subject summary</label>
+        <textarea id="subject"></textarea>
+
+        <label for="inputDropdown" class="dropdownLabel">Prompt Type:</label>
+        <select id="inputDropdown" name="inputDropdown">
+          <option value="0">Subject Explanation</option>
+          <option value="1">Subject Summary</option>
+        </select>
+
+        <button id="continue">Continue</button>
+    </div>
+
+    <pre id="output"></pre>
+
+    <script type="module" src="script.js"></script>  
+  </body>
+</html>

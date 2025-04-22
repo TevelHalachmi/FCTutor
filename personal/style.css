@@ -1,0 +1,44 @@
+.question{
+  position: relative;
+  width: 70%;
+  margin: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 10;
+}
+
+.question h1 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.question label {
+  display: block;
+  margin-bottom: -14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.question input[type="radio"] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.checkButton{
+  width: 10%;
+  min-height: 20px;
+  margin-left: 21px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.controlWrapper {
+  display: flex;
+  align-items: center; 
+  gap: 10px; 
+  font-family: Arial, sans-serif;
+}
+
+.rightCounter {
+  margin: 0; 
+  font-weight: bold;
+}
