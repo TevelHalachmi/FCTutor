@@ -27,6 +27,19 @@ textarea {
   pointer-events: none;
 }
 
+.number-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.numberLabel {
+  margin: 0; 
+  font-size: 17px;
+}
+
 button {
   font-size: 16px;
   cursor: pointer;

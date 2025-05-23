@@ -75,6 +75,7 @@ function onLoad(){
     questions = JSON.parse(rawQuestions);
   } catch (error) {
     console.error("Error parsing questions JSON:", error);
+    console.log(rawQuestions);
     return;
   }
 
