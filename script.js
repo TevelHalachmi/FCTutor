@@ -77,23 +77,26 @@ async function submitText() {
   if (start !== -1 && end !== -1 && end > start) {
     rawQuestions = response.substring(start + 1, end);
   }
-  rawQuestions = tryFixSyntaxErrors(rawQuestions);
+  rawQuestions = await tryFixSyntaxErrors(rawQuestions);
+  if (rawQuestions == null){
+    alert("Error occured generating questions.")
+    return;
+  }
   
   localStorage.setItem("questions", rawQuestions);
   window.location.href = (window.location.href + "personal/index.html").replace("index.html/", "");
 }
 
-function tryFixSyntaxErrors(json){
+async function tryFixSyntaxErrors(json){
   console.warn("Got syntax errors trying to fix them.");
   try {
     JSON.parse(json);
     return json;
   }
   catch {
-    const respone = getGroqResponse("Fix syntax errors in my json file: " + json);
-    const match = respone.match(/\[.*\]/s); // 's' flag allows . to match newlines
-    const result = match ? match[0] : null;
-    console.log(result);
+    const respone = await getGroqResponse("Fix syntax errors in my json file: " + json);
+    const match = respone.match(/\[.*\]/s); 
+    const result = match ? match[0] : null;   
     return result;
   }
 }

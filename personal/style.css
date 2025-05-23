@@ -23,11 +23,11 @@
   cursor: pointer;
 }
 
-.checkButton{
+.checkButton {
   width: 10%;
   min-height: 20px;
   margin-left: 21px;
-  font-size: 14px;
+  font-size: 1.5vw;  
   font-weight: 600;
 }
 
@@ -39,6 +39,8 @@
 }
 
 .rightCounter {
-  margin: 0; 
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 5px;
   font-weight: bold;
 }
