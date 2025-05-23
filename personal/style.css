@@ -1,46 +1,12 @@
-.question{
-  position: relative;
-  width: 70%;
-  margin: 20px;
-  font-family: Arial, sans-serif;
-  font-size: 10;
+.optionsContainer{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 200px;
+  margin: 20px auto;
 }
 
-.question h1 {
+ .optionsContainer button{
+  padding: 20px;
   font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.question label {
-  display: block;
-  margin-bottom: -14px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.question input[type="radio"] {
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.checkButton {
-  width: 10%;
-  min-height: 20px;
-  margin-left: 21px;
-  font-size: 1.5vw;  
-  font-weight: 600;
-}
-
-.controlWrapper {
-  display: flex;
-  align-items: center; 
-  gap: 10px; 
-  font-family: Arial, sans-serif;
-}
-
-.rightCounter {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: 5px;
-  font-weight: bold;
 }
