@@ -10,8 +10,11 @@
   </head>
   <body>
     <div class="input-container">
-        <label for="subject" class="promptLabel">Subject summary</label>
+        <label for="subject" id="subjectLabel" class="subjectLabel">Subject summary</label>
         <textarea id="subject"></textarea>
+
+        <label for="prompt" id="promptLabel" class="promptLabel">Extra Prompt</label>
+        <textarea id="prompt"></textarea>
 
         <label for="inputDropdown" class="dropdownLabel">Prompt Type:</label>
         <select id="inputDropdown" name="inputDropdown">
@@ -19,9 +22,14 @@
           <option value="1">Subject Summary</option>
         </select>
 
-        <div class="number-input-group">
+        <div class="numberInputGroup">
           <label for="numQuestions" class="numberLabel">Number of questions:</label>
           <input type="number" inputmode="numeric" id="numQuestions" min="1" max="100" step="1" value="1" />
+        </div>
+
+        <div class="languageInputGroup">
+          <label for="language" class="languageLabel">Language</label>
+          <input type="text" id="language" value="English">
         </div>
 
         <button id="continue">Continue</button>

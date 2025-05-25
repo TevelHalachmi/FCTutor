@@ -10,24 +10,33 @@ textarea {
   padding: 20px 10px 10px;
   font-size: 16px;
   line-height: 1.4;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 4px;
   resize: none;
   min-height: 100px;
 }
 
-.promptLabel {
-  position: absolute;
+.subjectLabel {
   top: -8px; 
   left: 12px; 
   background: white;
   padding: 0 5px;
-  color: #999;
+  color: black;
   font-size: 12px; 
   pointer-events: none;
 }
 
-.number-input-group {
+.promptLabel {
+  top: -8px; 
+  left: 12px; 
+  background: white;
+  padding: 0 5px;
+  color: black;
+  font-size: 12px; 
+  pointer-events: none;
+}
+
+.numberInputGroup {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -45,6 +54,10 @@ button {
   cursor: pointer;
 }
 
-.input-container:focus-within label{
-  color: black;
+.languageInputGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

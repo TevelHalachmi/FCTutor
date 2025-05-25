@@ -3,23 +3,25 @@ let promptType = 0;
 const explanationPrompt = 
 `I will send you the subject that I want to learn. 
 {r}
+{e}
 Subject: {m}`;
 
 const summaryPrompt = 
 `I will send you a summary of a subject. 
 {r}
+{e}
 Summary: {m}`;
 
 const syntaxPrompt = `I want you to turn it into a kahoot like quiz.
-    give me questions with 4 answers for each or a question true or false. 
+    give me questions with 4 answers for each, no true or false questions. 
     I want these to help me study on the subject.
     I am using this for an app so I will give a special syntax for writing these.
     I want you to treat this like a json object of a dictionary. I need a question array, each question has of the following fields:
     give options array(should be 4) and give index of correct answer.
     here are the names for the fields: question string: question, answers array: options, correct answer index: correct.
     The only difference from json is before the [ for the questions are put ~ and after the end of questions array ] put ~
-    I want {n} questions, mostly option questions.
-    Answer in the language of the subject.`;
+    I want {n} questions.
+    The questions and answers must be only in this language: {l}`;
 
 function autoResize(textarea) {
   textarea.style.height = "auto";
@@ -39,8 +41,17 @@ async function getGroqResponse(message) {
     })
   });
 
-  const data = await response.json();
-  return data.choices[0].message.content;
+  try
+  {
+    const data = await response.json();
+    return data.choices[0].message.content;
+  }
+  catch (error)
+  {
+    console.error(error.message);
+    console.log(response);
+    return undefined;
+  }
 }
 
 async function submitText() {
@@ -50,10 +61,13 @@ async function submitText() {
     return;
   }
 
+  const extraPrompt = document.getElementById("extra").value;
   const numQuestions = document.getElementById("numQuestions").valueAsNumber;
+  const lang = document.getElementById("language").value;
 
   let prompt = "";
-  switch (promptType){
+  switch (promptType)
+  {
     case 0:
       prompt = explanationPrompt;
       break;
@@ -66,7 +80,9 @@ async function submitText() {
 
   const message = prompt.replace("{r}", syntaxPrompt)
     .replace("{m}", text)
-    .replace("{n}", numQuestions);
+    .replace("{n}", numQuestions)
+    .replace("{l}", lang)
+    .replace("{e}", extraPrompt)
     
   const response = await getGroqResponse(message);
   const start = response.indexOf("~");
@@ -103,6 +119,21 @@ async function tryFixSyntaxErrors(json){
 
 function onPromptTypeChanged(event){
   promptType = parseInt(event.target.value);
+
+  let text = "";
+  switch (promptType)
+  {
+    case 0:
+      text = "Subject Explanation";
+      break;
+    case 1:
+      text = "Subject Summary";
+      break
+    default:
+      throw new Error("Invalid prompt type: " + promptType);
+  }
+
+  document.getElementById("subjectLabel").textContent
 }
 
 function onNumQuestionsChanged(event) {
@@ -128,7 +159,9 @@ document.getElementById("inputDropdown")?.addEventListener("change", onPromptTyp
 document.getElementById("numQuestions")?.addEventListener("change", onNumQuestionsChanged);
 
 
-const textarea = document.getElementById("subject");
-textarea?.addEventListener("input", () => autoResize(textarea));
+const subject = document.getElementById("subject");
+subject?.addEventListener("input", () => autoResize(subject));
+const prompt = document.getElementById("prompt");
+prompt?.addEventListener("input", () => autoResize(prompt));
 
 document.getElementById("continue")?.addEventListener("click", submitText);

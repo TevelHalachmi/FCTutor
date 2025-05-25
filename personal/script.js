@@ -1,28 +1,57 @@
-function createMultipleChoice(questionTitle, options) {
-  const container = document.createElement("div");
-  container.classList.add("question");
+let currentQuestion = 0;
+let questions;
+let corrects = 0;
 
-  const title = document.createElement("h1");
+function displayQuestion(index){
+  document.getElementById("optionsContainer").style.display = "grid"
+  document.getElementById("answerContainer").style.display = "none"
 
-  title.textContent = questionTitle;
-  container.appendChild(title);
+  const question = questions[index];
 
-  options.forEach((optionText, index) => {
-    const label = document.createElement("label");
+  document.getElementById("title").innerHTML = `${currentQuestion + 1}/${questions.length}<br>${question.question}`;
 
-    const input = document.createElement("input");
-    input.type = "radio"; 
-    input.name = questionTitle;
-    input.value = index;
+  document.getElementById("btn1").textContent = question.options[0];
+  document.getElementById("btn2").textContent = question.options[1];
+  document.getElementById("btn3").textContent = question.options[2];
+  document.getElementById("btn4").textContent = question.options[3];
+}
 
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(" " + optionText));
-    
-    container.appendChild(label);
-    container.appendChild(document.createElement("br")); 
-  });
+function answerQuestion(index){
+  let question = questions[currentQuestion];
 
-  document.body.appendChild(container);
+  document.getElementById("optionsContainer").style.display = "none"
+  document.getElementById("answerContainer").style.display = "block"
+
+  document.getElementById("guessed").textContent = "Your answer: " + question.options[index];
+  document.getElementById("correct").textContent = "Correct answer: " + question.options[question.correct];
+
+  if (index == question.correct){
+    corrects++;
+  }
+}
+
+function continueToNext(){
+    if (currentQuestion != questions.length - 1)
+    {
+      currentQuestion++;
+      displayQuestion(currentQuestion);
+    }
+    else
+    {
+      document.getElementById("optionsContainer").style.display = "none"
+      document.getElementById("answerContainer").style.display = "none"      
+      document.getElementById("scoreContainer").style.display = "block"
+
+      document.getElementById("title").textContent = "Final Score";
+      document.getElementById("score").textContent = `${corrects}/${questions.length}`;
+    }
+}
+
+function restart(){
+  document.getElementById("scoreContainer").style.display = "none"
+  corrects = 0;
+  currentQuestion = 0;
+  displayQuestion(0);
 }
 
 function onLoad(){
@@ -33,7 +62,6 @@ function onLoad(){
     return;
   }
 
-  let questions;
   try {
     questions = JSON.parse(rawQuestions);
   } catch (error) {
@@ -43,6 +71,16 @@ function onLoad(){
   }
 
   console.log(questions);
+
+  document.getElementById("btn1").addEventListener("click", () => answerQuestion(0));
+  document.getElementById("btn2").addEventListener("click", () => answerQuestion(1));
+  document.getElementById("btn3").addEventListener("click", () => answerQuestion(2));
+  document.getElementById("btn4").addEventListener("click", () => answerQuestion(3));
+
+  document.getElementById("continue").addEventListener("click", continueToNext);  
+  document.getElementById("restart").addEventListener("click", restart);
+
+  restart();
 }
 
 document.addEventListener("DOMContentLoaded", onLoad);
